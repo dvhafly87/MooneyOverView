@@ -1,0 +1,847 @@
+/* 구독 서비스 관리 데모 페이지 - 신뢰감 있는 초록색 계열 디자인 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.subscription-container {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0fdf4 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    border-radius: 30px;
+    padding: 0;
+}
+
+.subscription-header {
+    text-align: center;
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    color: white;
+    margin: 0;
+    padding: 40px 20px;
+    border-radius: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.subscription-header::before {
+    content: '💳';
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
+}
+
+.subscription-header::after {
+    content: '🔄';
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 1.5rem;
+    opacity: 0.4;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.subscription-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subscription-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0 0 15px 0;
+}
+
+.sub-demo-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    margin-top: 10px;
+}
+
+.sub-demo-badge span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 대시보드 레이아웃 */
+.subscription-dashboard {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 상단 요약 카드들 */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.summary-card.total {
+    border-left-color: #059669;
+}
+
+.summary-card.pending {
+    border-left-color: #f59e0b;
+}
+
+.summary-card.alert {
+    border-left-color: #dc2626;
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.summary-card.total .card-icon {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.summary-card.pending .card-icon {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.summary-card.alert .card-icon {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.card-content h3 {
+    margin: 0 0 8px 0;
+    color: #374151;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-content .amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.card-content .subtitle {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+/* 구독 목록 */
+.subscription-list {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.list-header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.filter-controls,
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-icon {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.filter-select,
+.sort-select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.filter-select:focus,
+.sort-select:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* 구독 아이템들 */
+.subscriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.subscription-item {
+    border: 2px solid #f3f4f6;
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.subscription-item:hover {
+    border-color: #10b981;
+    box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+    background: white;
+}
+
+.subscription-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.service-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.service-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.service-details h4 {
+    margin: 0 0 8px 0;
+    color: #111827;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.service-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.category-tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid currentColor;
+}
+
+.payment-cycle {
+    color: #6b7280;
+    font-size: 0.8rem;
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.subscription-status {
+    text-align: right;
+}
+
+.subscription-status .amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 구독 세부 정보 */
+.subscription-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.detail-icon {
+    color: #10b981;
+    font-size: 0.8rem;
+}
+
+/* 구독 액션 버튼들 */
+.subscription-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.pay-now-btn,
+.edit-btn,
+.delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pay-now-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.pay-now-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 새 구독 추가 폼 */
+.add-subscription {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.form-header h3 {
+    margin: 0;
+    color: #111827;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.demo-label {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fbbf24;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.subscription-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #10b981;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.add-btn,
+.reset-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.add-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.reset-btn {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.reset-btn:hover {
+    background: #e5e7eb;
+}
+
+/* 빠른 추가 템플릿 */
+.quick-templates {
+    border-top: 2px solid #f3f4f6;
+    padding-top: 25px;
+}
+
+.quick-templates h4 {
+    margin: 0 0 15px 0;
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.template-btn {
+    background: #f8fffe;
+    border: 2px solid #10b981;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.template-btn:hover {
+    background: #ecfdf5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.template-name {
+    display: block;
+    font-weight: 600;
+    color: #111827;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.template-price {
+    display: block;
+    color: #10b981;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* 기술 설명 섹션 */
+.sub-tech-explanation {
+    max-width: 1400px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.sub-tech-explanation h2 {
+    text-align: center;
+    color: #059669;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.sub-tech-intro {
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.sub-tech-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.sub-tech-card {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 2px solid #bbf7d0;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sub-tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #10b981, #059669);
+    transition: left 0.5s ease;
+}
+
+.sub-tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-color: #10b981;
+}
+
+.sub-tech-card:hover::before {
+    left: 0;
+}
+
+.sub-tech-card .tech-icon {
+    font-size: 3rem;
+    color: #10b981;
+    margin-bottom: 15px;
+}
+
+.sub-tech-card h3 {
+    color: #059669;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.sub-tech-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.sub-code-snippet {
+    background: #059669;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.sub-code-snippet code {
+    color: #ecfdf5;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+}
+
+/* API 엔드포인트 */
+.sub-api-endpoints h3 {
+    color: #059669;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.sub-endpoint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sub-endpoint {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-radius: 10px;
+    border-left: 4px solid #bbf7d0;
+    transition: all 0.2s ease;
+}
+
+.sub-endpoint:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sub-endpoint.get {
+    border-left-color: #059669;
+}
+
+.sub-endpoint.post {
+    border-left-color: #10b981;
+}
+
+.sub-endpoint.put {
+    border-left-color: #34d399;
+}
+
+.sub-endpoint.delete {
+    border-left-color: #ef4444;
+}
+
+.sub-endpoint .method {
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    text-align: center;
+}
+
+.sub-endpoint.get .method {
+    background: #059669;
+}
+
+.sub-endpoint.post .method {
+    background: #10b981;
+}
+
+.sub-endpoint.put .method {
+    background: #34d399;
+}
+
+.sub-endpoint.delete .method {
+    background: #ef4444;
+}
+
+.sub-endpoint .url {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    background: #059669;
+    color: #ecfdf5;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.sub-endpoint .desc {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* 반응형 웹 */
+@media (max-width: 1199px) {
+    .subscription-container {
+        padding: 30px;
+    }
+
+    .subscription-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .main-content {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .summary-cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .sub-tech-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .sub-endpoint {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 640px) {
+    .subscription-header {
+        padding: 30px 15px;
+        border-radius: 0;
+    }
+
+    .subscription-header h1 {
+        font-size: 2rem;
+    }
+
+    .subscription-dashboard {
+        padding: 0 15px;
+    }
+
+    .subscription-list,
+    .add-subscription {
+        padding: 20px;
+    }
+
+    .subscription-main {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .subscription-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .template-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sub-tech-explanation {
+        margin: 20px 15px;
+        padding: 30px 20px;
+    }
+}

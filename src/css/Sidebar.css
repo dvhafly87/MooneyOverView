@@ -1,0 +1,317 @@
+/* 사이드바 스타일 */
+.sidebar {
+    width: 250px;
+    background-color: #6b7280;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    overflow: hidden;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* 모바일 사이드바 */
+.mobile-sidebar {
+    z-index: 999;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar.closed {
+    width: 80px;
+    --sidebar-width: 80px;
+}
+
+/*사이드바 상단부 로고 영역*/
+.Side-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.Side-logo-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+}
+
+.Side-logo-container p {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ffffff, #f1f5f9);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.imgwrapper {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 20px;
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(-5px);
+}
+
+.imgwrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.imgwrapper:hover::before {
+    transform: translateX(100%);
+}
+
+.imgwrapper:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.imgwrapper img {
+    width: 90%;
+    height: 90%;
+    max-width: 70px;
+    max-height: 70px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.imgwrapper:hover img {
+    transform: scale(1.1);
+}
+
+/*사이드바 상단부 로고 영역 끝*/
+
+.logo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 32px;
+}
+
+.logo-header p {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+/* 사이드바가 숨겨졌을 때 토글 버튼 중앙 배치 */
+.sidebar.closed .toggle-btn {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toggle-btn:hover {
+    color: #3498db;
+}
+
+.toggle-icon {
+    font-size: 18px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar ul li:first-child {
+    margin-bottom: 30px;
+    /* 첫 번째 li(로고) 하단 여백 */
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.menu-icon {
+    margin-right: 12px;
+    font-size: 16px;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    transform: rotate(0deg);
+}
+
+.sidebar a:hover .menu-icon {
+    color: #3498db;
+    transform: rotate(5deg);
+}
+
+.sidebar a:hover {
+    background-color: #34495e;
+    color: #3498db;
+    border-left-color: #3498db;
+}
+
+.sidebar a.active {
+    background-color: #34495e;
+    color: #3498db;
+    border-left-color: #3498db;
+}
+
+.sidebar a.active .menu-icon {
+    color: #3498db;
+}
+
+/* 메인 컨텐츠 영역 */
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+}
+
+/* 모바일 닫기 버튼 */
+.mobile-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.mobile-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* 반응형 웹 */
+@media (max-width: 1199px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar.closed {
+        width: 60px;
+    }
+
+    .Side-logo-container p {
+        font-size: 24px;
+    }
+
+    .imgwrapper {
+        width: 100px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        width: 280px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobile-sidebar {
+        transform: translateX(0);
+    }
+
+    .Side-logo-container {
+        margin-bottom: 20px;
+        padding: 20px 15px;
+    }
+
+    .Side-logo-container p {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .imgwrapper {
+        width: 80px;
+        height: 60px;
+        border-radius: 15px;
+    }
+
+    .sidebar a {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .menu-icon {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    /* 모바일에서는 토글 버튼 숨김 */
+    .toggle-btn {
+        display: none;
+    }
+}

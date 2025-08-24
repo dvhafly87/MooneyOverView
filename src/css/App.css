@@ -1,0 +1,98 @@
+/* 전체 컨테이너 */
+.container {
+    display: flex;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* 메인 콘텐츠 영역 */
+.content {
+    flex: 1;
+    transition: margin-left 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
+}
+
+/* 사이드바가 열린 상태일 때 */
+.container.sidebar-open .content {
+    margin-left: 250px;
+}
+
+/* 사이드바가 닫힌 상태일 때 */
+.container.sidebar-closed .content {
+    margin-left: 80px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* 반응형 웹 기본 설정 */
+* {
+    box-sizing: border-box;
+}
+
+/* 태블릿 (768px ~ 1199px) */
+@media (max-width: 1199px) {
+    .container.sidebar-open .content {
+        margin-left: 200px;
+    }
+
+    .container.sidebar-closed .content {
+        margin-left: 60px;
+    }
+}
+
+/* 모바일 (767px 이하) */
+@media (max-width: 767px) {
+    .container.sidebar-open .content {
+        margin-left: 0;
+    }
+
+    .container.sidebar-closed .content {
+        margin-left: 0;
+    }
+
+    /* 모바일에서 사이드바 오버레이 */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 모바일 햄버거 메뉴 버튼 */
+    .mobile-menu-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 997;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        border: none;
+        color: white;
+        padding: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+    }
+}
