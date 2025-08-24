@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/MooneyOverView">
       <div className={`container ${sidebarIsOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <SideBar isOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
 
